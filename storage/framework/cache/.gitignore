@@ -1,0 +1,4 @@
+*
+!data/
+!.dockerignore
+!.gitignore

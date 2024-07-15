@@ -1,0 +1,24 @@
+#!/bin/bash
+
+for cmd in jq curl top df nproc; do
+  if [ "$(command -v $cmd)" == "" ]; then
+    echo "$cmd command not found"
+    exit 1
+  fi
+done
+
+data=$(
+  jq -an \
+  --arg top "$(top -b -w 512 -n 1)" \
+  --arg df "$(df -B1 | grep -v tmpfs)" \
+  --arg cores "$(nproc --all)" \
+  --arg uptime "$(cat /proc/uptime)" \
+  '{"top": $top, "df": $df, "cores": $cores, "uptime": $uptime}'
+)
+
+curl -k -X POST \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H "Authorization: Bearer :TOKEN" \
+  -d "$data" \
+  :URL

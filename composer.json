@@ -1,0 +1,139 @@
+{
+    "name": "eusonlito/server-monitor",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "eusonlito/captcha": "^1.1",
+        "eusonlito/disposable-email-validator": "^0.1.9",
+        "eusonlito/laravel-meta": "^3.3",
+        "laravel/framework": "^11.0",
+        "laravel/helpers": "^1.6",
+        "league/commonmark": "^2.4",
+        "predis/predis": "^2.1.1",
+        "sentry/sentry-laravel": "^4.1"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "dev-master",
+        "brianium/paratest": "7.x",
+        "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.51",
+        "larastan/larastan": "^2.9",
+        "laravel/pint": "dev-main",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "nunomaduro/phpinsights": "dev-master",
+        "phpcompatibility/php-compatibility": "dev-develop",
+        "phpunit/phpunit": "^10.0",
+        "psalm/plugin-laravel": "dev-master",
+        "spatie/laravel-ignition": "dev-main",
+        "squizlabs/php_codesniffer": "^3.0",
+        "vimeo/psalm": "^5.23"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
+        }
+    },
+    "autoload": {
+        "classmap": [
+            "database/migrations"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\": "database/"
+        },
+        "files": [
+            "app/Services/Helper/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true,
+    "scripts": {
+        "post-install-cmd": [
+            "@composer dump-autoload",
+            "@composer artisan-cache --ansi"
+        ],
+
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+
+        "post-update-cmd": [
+            "@php artisan test"
+        ],
+
+        "artisan-cache-clear": [
+            "@php artisan optimize:clear --ansi"
+        ],
+
+        "artisan-cache": [
+            "@php artisan optimize --ansi",
+            "@php artisan view:cache --ansi"
+        ],
+
+        "deploy": [
+            "Composer\\Config::disableProcessTimeout",
+            "rm -f bootstrap/cache/*.php",
+            "git checkout .",
+            "git pull",
+            "touch storage/database/database.sqlite",
+            "@composer install --no-dev --optimize-autoloader --classmap-authoritative --ansi",
+            "@php artisan migrate --force --ansi",
+            "@php artisan db:seed --force --ansi --class=\"Database\\Seeders\\Database\"",
+            "@php artisan queue:restart --ansi"
+        ],
+
+        "deploy-dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "rm -f bootstrap/cache/*.php",
+            "@composer install --optimize-autoloader --classmap-authoritative --ansi",
+            "@php artisan migrate --force --ansi",
+            "@php artisan db:seed --class=\"Database\\Seeders\\Database\"",
+            "@composer artisan-cache-clear",
+            "@php artisan queue:restart --ansi"
+        ],
+
+        "deploy-docker": [
+            "Composer\\Config::disableProcessTimeout",
+            "rm -f bootstrap/cache/*.php",
+            "@composer install --no-dev --optimize-autoloader --classmap-authoritative --ansi",
+            "@php artisan migrate --force --ansi",
+            "@php artisan db:seed --class=\"Database\\Seeders\\Database\" --force",
+            "@php artisan queue:restart --ansi"
+        ],
+
+        "fix": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php ./vendor/bin/php-cs-fixer fix -v --ansi",
+            "@php ./vendor/bin/pint -v"
+        ],
+
+        "quality": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan insights -v --ansi || true",
+            "@php ./vendor/bin/phpstan analyse --ansi || true",
+            "@php ./vendor/bin/psalm --no-cache || true"
+        ],
+
+        "translation": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan core:translation:fix --ansi",
+            "@php artisan core:translation:fill --ansi",
+            "@php artisan core:translation:clean --ansi",
+            "@php artisan core:translation:unused --ansi",
+            "git checkout resources/lang/*/validation.php"
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Castellano",
+        "code": "es",
+        "iso": "es_ES",
+        "enabled": true,
+        "default": true,
+        "rtl": false
+    },
+
+    {
+        "name": "English",
+        "code": "en",
+        "iso": "en_US",
+        "enabled": true,
+        "default": false,
+        "rtl": false
+    }
+]

@@ -1,0 +1,16 @@
+**/node_modules
+
+/.phpunit.cache
+/public/manifest.json
+/public/hot
+/storage/tmp
+/vendor
+
+.env
+.server-monitor
+.phpunit.result.cache
+.php_cs.cache
+.php-cs-fixer.cache
+**/.DS_Store
+
+*.sh

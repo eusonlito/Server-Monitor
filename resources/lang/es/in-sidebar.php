@@ -1,0 +1,18 @@
+<?php return [
+    'dashboard' => 'Dashboard',
+    'ip-lock' => 'IPs Bloquedas',
+    'logout' => 'Salir',
+    'monitor' => 'Monitor',
+    'monitor-database' => 'Base de Datos',
+    'monitor-index' => 'Sistema',
+    'monitor-installation' => 'Instalación',
+    'monitor-log' => 'Logs',
+    'profile' => 'Perfil',
+    'server' => 'Servidores',
+    'server-create' => 'Crear',
+    'server-index' => 'Lista',
+    'user' => 'Usuarios',
+    'user-create' => 'Crear',
+    'user-index' => 'Lista',
+    'user-session' => 'Sesiones',
+];
