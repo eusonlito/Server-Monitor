@@ -220,6 +220,20 @@ charts.push({
 
 </script>
 
+<form method="get">
+    <div class="box p-5 mt-3">
+        <div class="lg:flex">
+            <div class="flex-1 px-2 mt-2 lg:mt-0">
+                <input type="text" name="date_start" class="form-control form-control-lg" value="{{ $REQUEST->input('date_start') }}" placeholder="{{ __('common.filters.date_start') }}" data-datepicker data-change-submit />
+            </div>
+
+            <div class="flex-1 px-2 mt-2 lg:mt-0">
+                <input type="text" name="date_end" class="form-control form-control-lg" value="{{ $REQUEST->input('date_end') }}" placeholder="{{ __('common.filters.date_end') }}" data-datepicker data-change-submit />
+            </div>
+        </div>
+    </div>
+</form>
+
 <div class="grid grid-cols-12 gap-6 mt-5">
     @if ($cpu)
 

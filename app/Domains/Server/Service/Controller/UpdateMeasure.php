@@ -39,6 +39,7 @@ class UpdateMeasure extends ControllerAbstract
     {
         return MeasureModel::query()
             ->byServerId($this->row->id)
+            ->byRequest($this->request)
             ->withAppCpu()
             ->withAppMemory()
             ->withDisk()

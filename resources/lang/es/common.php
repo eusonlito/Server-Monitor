@@ -9,6 +9,10 @@
         'system' => 'Error del Sistema',
     ],
     'filter' => 'Filtrar',
+    'filters' => [
+        'date_end' => 'Fin',
+        'date_start' => 'Inicio',
+    ],
     'generate' => 'Generar',
     'reset' => 'Resetear',
     'show' => 'Mostrar',

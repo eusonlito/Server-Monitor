@@ -20,6 +20,18 @@ class UpdateChart extends ControllerAbstract
      */
     public function __construct(protected Request $request, protected Authenticatable $auth, protected Model $row)
     {
+        $this->request();
+    }
+
+    /**
+     * @return void
+     */
+    protected function request(): void
+    {
+        $this->requestMerge([
+            'date_start' => date('Y-m-d', strtotime('-1 day')),
+        ]);
+
     }
 
     /**
@@ -46,6 +58,7 @@ class UpdateChart extends ControllerAbstract
     {
         return MeasureModel::query()
             ->byServerId($this->row->id)
+            ->byRequest($this->request)
             ->orderByFirst()
             ->pluck('cpu_percent', 'created_at')
             ->all();
@@ -66,6 +79,7 @@ class UpdateChart extends ControllerAbstract
     {
         return MeasureModel::query()
             ->byServerId($this->row->id)
+            ->byRequest($this->request)
             ->orderByFirst()
             ->pluck('memory_used', 'created_at')
             ->all();
@@ -86,6 +100,7 @@ class UpdateChart extends ControllerAbstract
     {
         return MeasureModel::query()
             ->byServerId($this->row->id)
+            ->byRequest($this->request)
             ->max('memory_total') ?: 0;
     }
 
@@ -109,6 +124,7 @@ class UpdateChart extends ControllerAbstract
         return MeasureDiskModel::query()
             ->byServerId($this->row->id)
             ->byMount($this->row->measure->disk->mount)
+            ->byRequest($this->request)
             ->orderByFirst()
             ->pluck('used', 'created_at')
             ->all();

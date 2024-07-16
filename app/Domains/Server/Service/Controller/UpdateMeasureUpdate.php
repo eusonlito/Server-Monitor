@@ -73,7 +73,7 @@ class UpdateMeasureUpdate extends ControllerAbstract
     {
         return MeasureModel::query()
             ->byServerId($this->row->id)
-            ->byIdNext($this->measure->id)
+            ->byIdAfter($this->measure->id)
             ->orderByFirst()
             ->value('id');
     }
@@ -85,7 +85,7 @@ class UpdateMeasureUpdate extends ControllerAbstract
     {
         return MeasureModel::query()
             ->byServerId($this->row->id)
-            ->byIdPrevious($this->measure->id)
+            ->byIdBefore($this->measure->id)
             ->orderByLast()
             ->value('id');
     }

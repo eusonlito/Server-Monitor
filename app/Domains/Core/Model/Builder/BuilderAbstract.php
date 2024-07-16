@@ -4,6 +4,7 @@ namespace App\Domains\Core\Model\Builder;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 abstract class BuilderAbstract extends Builder
 {
@@ -86,6 +87,16 @@ abstract class BuilderAbstract extends Builder
     }
 
     /**
+     * @param string $created_at
+     *
+     * @return self
+     */
+    public function byCreatedAtBefore(string $created_at): self
+    {
+        return $this->where($this->addTable('created_at'), '<', $created_at);
+    }
+
+    /**
      * @param int $id
      *
      * @return self
@@ -100,7 +111,7 @@ abstract class BuilderAbstract extends Builder
      *
      * @return self
      */
-    public function byIdNext(int $id): self
+    public function byIdAfter(int $id): self
     {
         return $this->where($this->addTable('id'), '>', $id);
     }
@@ -110,7 +121,7 @@ abstract class BuilderAbstract extends Builder
      *
      * @return self
      */
-    public function byIdPrevious(int $id): self
+    public function byIdBefore(int $id): self
     {
         return $this->where($this->addTable('id'), '<', $id);
     }
@@ -143,6 +154,98 @@ abstract class BuilderAbstract extends Builder
     public function byIdsNot(array $ids): self
     {
         return $this->whereIntegerNotInRaw($this->addTable('id'), $ids);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param string $column
+     * @param string $cast
+     * @param string $exclude
+     *
+     * @return mixed
+     */
+    public function byRequestValue(Request $request, string $column, string $cast, string $exclude): mixed
+    {
+        if ($column === $exclude) {
+            return null;
+        }
+
+        $value = $request->input($column);
+
+        return match ($cast) {
+            'integer' => $this->byRequestValueInteger($value),
+            'string' => $this->byRequestValueString($value),
+            'boolean' => $this->byRequestValueBoolean($value),
+            'date' => $this->byRequestValueDate($value),
+        };
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return ?int
+     */
+    public function byRequestValueInteger(mixed $value): ?int
+    {
+        if (is_int($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && strlen($value)) {
+            return intval($value);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return ?string
+     */
+    public function byRequestValueString(mixed $value): ?string
+    {
+        return is_string($value) && strlen($value) ? $value : null;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return ?bool
+     */
+    public function byRequestValueBoolean(mixed $value): ?bool
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && strlen($value)) {
+            return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return ?string
+     */
+    public function byRequestValueDate(mixed $value): ?string
+    {
+        if ($this->byRequestValueString($value) === null) {
+            return null;
+        }
+
+        if (preg_match('/^([0-9]{4})\-([0-9]{2})\-([0-9]{2})$/', $value, $matches) === 0) {
+            return null;
+        }
+
+        if (checkdate(intval($matches[2]), intval($matches[3]), intval($matches[1]))) {
+            return $value;
+        }
+
+        return null;
     }
 
     /**
@@ -327,9 +430,9 @@ abstract class BuilderAbstract extends Builder
      *
      * @return self
      */
-    public function whenIdNext(int $id): self
+    public function whenIdAfter(int $id): self
     {
-        return $this->when($id, fn ($q) => $q->byIdNext($id));
+        return $this->when($id, fn ($q) => $q->byIdAfter($id));
     }
 
     /**

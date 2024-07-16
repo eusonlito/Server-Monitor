@@ -2,6 +2,20 @@
 
 @section ('content')
 
+<form method="get">
+    <div class="box p-5 mt-3">
+        <div class="lg:flex">
+            <div class="flex-1 px-2 mt-2 lg:mt-0">
+                <input type="text" name="date_start" class="form-control form-control-lg" value="{{ $REQUEST->input('date_start') }}" placeholder="{{ __('common.filters.date_start') }}" data-datepicker data-change-submit />
+            </div>
+
+            <div class="flex-1 px-2 mt-2 lg:mt-0">
+                <input type="text" name="date_end" class="form-control form-control-lg" value="{{ $REQUEST->input('date_end') }}" placeholder="{{ __('common.filters.date_end') }}" data-datepicker data-change-submit />
+            </div>
+        </div>
+    </div>
+</form>
+
 <div class="overflow-auto scroll-visible header-sticky">
     <table class="table table-report sm:mt-2 font-medium font-semibold text-center whitespace-nowrap">
         <thead>
