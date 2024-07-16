@@ -7,14 +7,17 @@ for cmd in jq curl top df nproc; do
   fi
 done
 
-data=$(
-  jq -an \
-  --arg top "$(top -b -w 512 -n 1)" \
-  --arg df "$(df -B1 | grep -v tmpfs)" \
-  --arg cores "$(nproc --all)" \
-  --arg uptime "$(cat /proc/uptime)" \
-  '{"top": $top, "df": $df, "cores": $cores, "uptime": $uptime}'
-)
+top=$(top -b -w 512 -n 1)
+df=$(df -B1 | grep -v tmpfs)
+cores=$(nproc --all)
+uptime=$(cat /proc/uptime)
+
+data=$(jq -n \
+  --arg top "$top" \
+  --arg df "$df" \
+  --arg cores "$cores" \
+  --arg uptime "$uptime" \
+  '{"top": $top, "df": $df, "cores": $cores, "uptime": $uptime}')
 
 curl -k -X POST \
   -H "Content-Type: application/json" \
