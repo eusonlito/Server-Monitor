@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'default'),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ return [
     */
 
     'connections' => [
-        'sqlite' => [
+        'default' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
             'database' => base_path(env('DB_DATABASE')),
