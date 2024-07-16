@@ -34,8 +34,8 @@ class TopMemory extends ParserAbstract
             $free = $this->float($matches[3]) * $mult;
             $used = $this->float($matches[5]) * $mult;
         } else {
-            $free = $this->float($matches[3]) * $mult;
-            $used = $this->float($matches[5]) * $mult;
+            $free = $this->float($matches[5]) * $mult;
+            $used = $this->float($matches[3]) * $mult;
         }
 
         $buffer = $this->float($matches[7]) * $mult;

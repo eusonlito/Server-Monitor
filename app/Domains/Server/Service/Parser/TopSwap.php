@@ -29,8 +29,15 @@ class TopSwap extends ParserAbstract
         };
 
         $total = $this->float($matches[2]) * $mult;
-        $free = $this->float($matches[3]) * $mult;
-        $used = $this->float($matches[4]) * $mult;
+
+        if ($matches[4] === 'free') {
+            $free = $this->float($matches[3]) * $mult;
+            $used = $this->float($matches[5]) * $mult;
+        } else {
+            $free = $this->float($matches[5]) * $mult;
+            $used = $this->float($matches[3]) * $mult;
+        }
+
         $available = $total - $used;
         $percent = $total ? intval(round($used / $total * 100)) : 0;
 
@@ -48,6 +55,6 @@ class TopSwap extends ParserAbstract
      */
     protected function parseExp(): string
     {
-        return '/(K|M|G)iB Swap\s*:\s*([0-9]+(?:[,.][0-9]+)?)\s*total,\s*([0-9]+(?:[,.][0-9]+)?)\s*free,\s*([0-9]+(?:[,.][0-9]+)?)\s*used/';
+        return '/(K|M|G)iB Swap\s*:\s*([0-9]+(?:[,.][0-9]+)?)\s*total,\s*([0-9]+(?:[,.][0-9]+)?)\s*(free|used),\s*([0-9]+(?:[,.][0-9]+)?)\s*(free|used)/';
     }
 }
