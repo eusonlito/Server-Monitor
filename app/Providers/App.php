@@ -17,6 +17,7 @@ class App extends ServiceProvider
     {
         $this->https();
         $this->locale();
+        $this->database();
     }
 
     /**
@@ -48,5 +49,13 @@ class App extends ServiceProvider
         if (defined('LC_MESSAGES')) {
             setlocale(LC_MESSAGES, $locale);
         }
+    }
+
+    /**
+     * @return void
+     */
+    protected function database(): void
+    {
+        $this->factory('SQLite')->action()->configureConnection();
     }
 }

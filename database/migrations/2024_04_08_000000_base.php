@@ -276,13 +276,10 @@ return new class extends MigrationAbstract {
      */
     protected function optimize(): void
     {
-        $this->db()->unprepared('PRAGMA journal_mode = wal;');
-        $this->db()->unprepared('PRAGMA synchronous = normal;');
-        $this->db()->unprepared('PRAGMA foreign_keys = on;');
-        $this->db()->unprepared('PRAGMA temp_store = memory;');
-        $this->db()->unprepared('PRAGMA mmap_size = 30000000000;');
+        $this->db()->unprepared('PRAGMA journal_mode = WAL;');
+        $this->db()->unprepared('PRAGMA synchronous = NORMAL;');
         $this->db()->unprepared('PRAGMA page_size = 32768;');
+        $this->db()->unprepared('PRAGMA cache_size = -20000;');
         $this->db()->unprepared('PRAGMA auto_vacuum = incremental;');
-        $this->db()->unprepared('PRAGMA incremental_vacuum;');
     }
 };
