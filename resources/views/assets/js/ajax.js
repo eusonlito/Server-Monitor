@@ -99,7 +99,9 @@ export default class {
     }
 
     setErrorCallback(callback) {
-        this.errorCallback = callback || function (message) { console.error(message) };
+        this.errorCallback = callback || function (message) {
+            console.error(message)
+        };
 
         return this;
     }
@@ -174,7 +176,7 @@ export default class {
         let data;
 
         try {
-            data = JSON.parse(text);
+            data = JSON.parse(text || '{}');
         } catch (error) {
             return this.errorCallback(text);
         }

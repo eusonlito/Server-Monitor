@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['user-auth']], static function () {
     Route::any('/server', Index::class)->name('server.index');
     Route::any('/server/create', Create::class)->name('server.create');
+    Route::post('/server/order', Order::class)->name('server.order');
     Route::any('/server/{id}', Update::class)->name('server.update');
     Route::any('/server/{id}/boolean/{column}', UpdateBoolean::class)->name('server.update.boolean');
     Route::any('/server/{id}/chart', UpdateChart::class)->name('server.update.chart');

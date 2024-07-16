@@ -24,5 +24,7 @@ import './data-scroll-bottom.js';
 import './data-click-one.js';
 import './data-delete-modal-one.js';
 import './data-update-boolean.js';
+import './data-draggable.js';
+import './data-server-order.js';
 import './modal.js';
 import './alert.js';

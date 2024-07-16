@@ -1,7 +1,13 @@
 <div class="box">
-    <a href="{{ route('server.update.chart', $server->id) }}" class="block border-b text-base font-medium px-5 py-2 lg:py-3">
-        {{ $server->name }}
-    </a>
+    <div class="flex border-b text-base font-medium px-5 py-2 lg:py-3 items-center">
+        <a href="{{ route('server.update.chart', $server->id) }}" class="flex-1 align-middle">
+            {{ $server->name }}
+        </a>
+
+        <div class="text-gray-400" data-draggable-handle>
+            @icon('align-justify')
+        </div>
+    </div>
 
     @if ($measure)
 

@@ -45,6 +45,14 @@ class ActionFactory extends ActionFactoryAbstract
     }
 
     /**
+     * @return void
+     */
+    public function order(): void
+    {
+        $this->actionHandle(Order::class, $this->validate()->order());
+    }
+
+    /**
      * @return string
      */
     public function script(): string

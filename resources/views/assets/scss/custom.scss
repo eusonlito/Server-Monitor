@@ -86,6 +86,10 @@
     white-space: nowrap;
 }
 
+[data-draggable-handle] {
+    cursor: move;
+}
+
 .text-danger {
     --tw-text-opacity: 1;
     color: rgb(var(--color-danger) / var(--tw-text-opacity));
