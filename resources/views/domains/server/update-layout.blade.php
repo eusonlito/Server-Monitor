@@ -17,10 +17,6 @@
 
     @if ($ROUTE === 'server.update.measure.update')
 
-    <div class="nav nav-tabs flex overflow-auto whitespace-nowrap" role="tablist">
-        <a href="{{ route('server.update.measure.update', [$row->id, $measure->id]) }}" class="p-4 {{ str_starts_with($ROUTE, 'server.update.measure') ? 'active' : '' }}" role="tab">@dateLocal($measure->created_at)</a>
-    </div>
-
     @if ($previous)
 
     <a href="{{ route('server.update.measure.update', [$row->id, $previous]) }}" class="p-4" role="tab">&laquo; {{ __('server-update.header.previous') }}</a>
@@ -30,6 +26,10 @@
     <span class="text-gray-300 p-4" role="tab">&laquo; {{ __('server-update.header.previous') }}</span>
 
     @endif
+
+    <div class="nav nav-tabs flex overflow-auto whitespace-nowrap" role="tablist">
+        <a href="{{ route('server.update.measure.update', [$row->id, $measure->id]) }}" class="p-4 {{ str_starts_with($ROUTE, 'server.update.measure') ? 'active' : '' }}" role="tab">@dateLocal($measure->created_at)</a>
+    </div>
 
     @if ($next)
 
