@@ -6,6 +6,8 @@
     'header' => [
         'charts' => 'Charts',
         'measures' => 'Records',
+        'next' => 'Next',
+        'previous' => 'Previous',
     ],
     'meta-title' => 'Servers > :title',
     'save' => 'Save',

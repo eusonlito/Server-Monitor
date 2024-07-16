@@ -58,7 +58,7 @@ abstract class CreateUpdateAbstract extends ActionAbstract
     protected function checkAuth(): void
     {
         if ($this->data['auth'] && $this->checkAuthExists()) {
-            $this->exceptionValidator('server-create.error.auth-exists');
+            $this->exceptionValidator(__('server-create.error.auth-exists'));
         }
     }
 

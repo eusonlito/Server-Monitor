@@ -3,6 +3,7 @@
     'dashboard' => 'Dashboard',
     'enabled' => 'Active',
     'error' => [
+        'auth-exists' => 'Another server with the same authentication already exists',
         'name-exists' => 'Another server with the same name already exists',
     ],
     'ip' => 'IP Filtering',

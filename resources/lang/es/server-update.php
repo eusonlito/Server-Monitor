@@ -6,6 +6,8 @@
     'header' => [
         'charts' => 'Gráficas',
         'measures' => 'Registros',
+        'next' => 'Siguiente',
+        'previous' => 'Anterior',
     ],
     'meta-title' => 'Servidores > :title',
     'save' => 'Guardar',

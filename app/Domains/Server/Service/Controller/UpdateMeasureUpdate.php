@@ -37,6 +37,8 @@ class UpdateMeasureUpdate extends ControllerAbstract
         return [
             'row' => $this->row,
             'measure' => $this->measure,
+            'next' => $this->next(),
+            'previous' => $this->previous(),
             'apps' => $this->apps(),
             'disks' => $this->disks(),
         ];
@@ -62,5 +64,27 @@ class UpdateMeasureUpdate extends ControllerAbstract
             ->byMeasureId($this->measure->id)
             ->list()
             ->get();
+    }
+
+    /**
+     * @return ?int
+     */
+    public function next(): ?int
+    {
+        return MeasureModel::query()
+            ->byServerId($this->row->id)
+            ->byIdNext($this->measure->id)
+            ->value('id');
+    }
+
+    /**
+     * @return ?int
+     */
+    public function previous(): ?int
+    {
+        return MeasureModel::query()
+            ->byServerId($this->row->id)
+            ->byIdPrevious($this->measure->id)
+            ->value('id');
     }
 }
