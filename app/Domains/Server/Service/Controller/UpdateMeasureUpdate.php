@@ -51,7 +51,7 @@ class UpdateMeasureUpdate extends ControllerAbstract
     {
         return MeasureAppModel::query()
             ->byMeasureId($this->measure->id)
-            ->list()
+            ->orderByMemoryDesc()
             ->get();
     }
 
@@ -62,7 +62,7 @@ class UpdateMeasureUpdate extends ControllerAbstract
     {
         return MeasureDiskModel::query()
             ->byMeasureId($this->measure->id)
-            ->list()
+            ->orderByPercentDesc()
             ->get();
     }
 

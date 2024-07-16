@@ -458,6 +458,27 @@ abstract class BuilderAbstract extends Builder
     }
 
     /**
+     * @param string $relation
+     *
+     * @return self
+     */
+    public function withRelation(string $relation): self
+    {
+        return $this->with([$relation => fn ($q) => $q->relationSelect()]);
+    }
+
+    /**
+     * @param string $relation
+     * @param bool $condition
+     *
+     * @return self
+     */
+    public function withRelationWhen(string $relation, bool $condition): self
+    {
+        return $this->when($condition, fn ($q) => $q->withRelation($relation));
+    }
+
+    /**
      * @param array $strings
      *
      * @return string

@@ -40,6 +40,7 @@ class UpdateMeasure extends ControllerAbstract
         return MeasureModel::query()
             ->byServerId($this->row->id)
             ->byRequest($this->request)
+            ->whenOrder($this->requestString('order_column'), $this->requestString('order_mode'))
             ->withAppCpu()
             ->withAppMemory()
             ->withDisk()

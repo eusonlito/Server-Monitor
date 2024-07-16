@@ -21,6 +21,23 @@ class MeasureApp extends BuilderAbstract
      */
     public function list(): self
     {
+        return $this->select($this->addTable([
+            'id',
+            'command',
+            'cpu_load',
+            'cpu_percent',
+            'command',
+            'memory_resident',
+            'memory_percent',
+            'measure_id',
+        ]));
+    }
+
+    /**
+     * @return self
+     */
+    public function orderByMemoryDesc(): self
+    {
         return $this->orderBy('memory_percent', 'DESC');
     }
 }

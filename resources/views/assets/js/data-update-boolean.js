@@ -10,8 +10,7 @@ import Ajax from './ajax';
 
         const value = response[element.dataset.updateBoolean];
 
-        element.innerHTML = '<span class="hidden">' + (value ? '1' : '0') + '</span>'
-            + '<span class="' + (value ? 'text-theme-10' : 'text-theme-24') + '">'
+        element.innerHTML = '<span class="svg-icon svg-icon-2 ' + (value ? 'text-sucess' : 'text-danger') + '">'
             + '<svg class="feather w-4 h-4"><use xlink:href="' + WWW + '/build/images/feather-sprite.svg#' + (value ? 'check-square' : 'square') + '" /></svg>'
             + '</span>';
     };

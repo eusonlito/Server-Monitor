@@ -54,15 +54,15 @@ trait Custom
         $status = boolval($status);
 
         if ($status) {
-            $color = 'svg-icon-success';
+            $color = 'text-success';
             $icon = 'check-square';
         } else {
-            $color = 'svg-icon-danger';
+            $color = 'text-danger';
             $icon = 'square';
         }
 
-        return '<span class="svg-icon svg-icon-2 stroke-white '.$color.'">'
-            .static::icon($icon, 'w-4 h-4 mr-2')
+        return '<span class="svg-icon svg-icon-2 '.$color.'">'
+            .static::icon($icon, 'w-4 h-4')
             .'</span>';
     }
 

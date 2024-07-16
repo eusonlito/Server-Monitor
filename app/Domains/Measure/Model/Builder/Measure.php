@@ -4,9 +4,17 @@ namespace App\Domains\Measure\Model\Builder;
 
 use Illuminate\Http\Request;
 use App\Domains\CoreApp\Model\Builder\BuilderAbstract;
+use App\Domains\Measure\Model\MeasureDisk as MeasureDiskModel;
 
 class Measure extends BuilderAbstract
 {
+    /**
+     * @var array
+     */
+    protected array $simpleOrder = [
+        'memory_percent', 'cpu_percent', 'created_at',
+    ];
+
     /**
      * @param \Illuminate\Http\Request $request
      * @param string $exclude = ''
@@ -43,9 +51,55 @@ class Measure extends BuilderAbstract
     /**
      * @return self
      */
+    public function list(): self
+    {
+        return $this->select($this->addTable([
+            'id',
+            'memory_used',
+            'memory_total',
+            'memory_percent',
+            'cpu_load_1',
+            'cpu_load_5',
+            'cpu_load_15',
+            'cores',
+            'cpu_percent',
+            'created_at',
+            'measure_app_cpu_id',
+            'measure_app_memory_id',
+            'measure_disk_id',
+            'server_id',
+        ]));
+    }
+
+    /**
+     * @param ?string $mode
+     *
+     * @return self
+     */
+    public function orderByMeasureDisk(?string $mode): self
+    {
+        return $this->orderByLeftJoin(MeasureDiskModel::class, 'percent', $mode);
+    }
+
+    /**
+     * @param ?string $column, ?string $mode
+     *
+     * @return self
+     */
+    public function whenOrder(?string $column, ?string $mode): self
+    {
+        return match ($column) {
+            'measure_disk' => $this->orderByMeasureDisk($mode),
+            default => $this->simpleOrder($column, $mode),
+        };
+    }
+
+    /**
+     * @return self
+     */
     public function withAppCpu(): self
     {
-        return $this->with('appCpu');
+        return $this->with(['appCpu' => static fn ($q) => $q->list()]);
     }
 
     /**
@@ -53,7 +107,7 @@ class Measure extends BuilderAbstract
      */
     public function withAppMemory(): self
     {
-        return $this->with('appMemory');
+        return $this->with(['appMemory' => static fn ($q) => $q->list()]);
     }
 
     /**
@@ -61,6 +115,6 @@ class Measure extends BuilderAbstract
      */
     public function withDisk(): self
     {
-        return $this->with('disk');
+        return $this->with(['disk' => static fn ($q) => $q->list()]);
     }
 }

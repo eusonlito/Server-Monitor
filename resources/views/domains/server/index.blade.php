@@ -26,7 +26,6 @@
                 <th class="text-left">{{ __('measure.db.app-memory') }}</th>
                 <th>{{ __('server-index.enabled') }}</th>
                 <th>{{ __('server-index.dashboard') }}</th>
-                <th>{{ __('server-index.created_at') }}</th>
                 <th>{{ __('server-index.updated_at') }}</th>
             </tr>
         </thead>
@@ -79,10 +78,15 @@
                     @endif
                 </td>
 
-                <td data-table-sort-value="{{ intval($row->enabled) }}">@status($row->enabled)</td>
-                <td data-table-sort-value="{{ intval($row->dashboard) }}">@status($row->dashboard)</td>
-                <td data-table-sort-value="{{ $row->created_at }}"><a href="{{ $link }}" class="block">@dateLocal($row->created_at)</a></td>
-                <td data-table-sort-value="{{ $row->updated_at }}"><a href="{{ $link }}" class="block">@dateLocal($row->updated_at)</a></td>
+                <td data-table-sort-value="{{ intval($row->enabled) }}">
+                    <a href="{{ route('server.update.boolean', [$row->id, 'enabled']) }}" data-update-boolean="enabled" class="block text-center">@status($row->enabled)</a>
+                </td>
+                <td data-table-sort-value="{{ intval($row->dashboard) }}">
+                    <a href="{{ route('server.update.boolean', [$row->id, 'dashboard']) }}" data-update-boolean="dashboard" class="block text-center">@status($row->dashboard)</a>
+                </td>
+                <td data-table-sort-value="{{ $row->updated_at }}">
+                    <a href="{{ $link }}" class="block">@dateLocal($row->updated_at)</a>
+                </td>
             </tr>
 
             @endforeach

@@ -66,6 +66,20 @@ class MeasureDisk extends BuilderAbstract
      */
     public function list(): self
     {
+        return $this->select($this->addTable([
+            'id',
+            'used',
+            'size',
+            'percent',
+            'measure_id',
+        ]));
+    }
+
+    /**
+     * @return self
+     */
+    public function orderByPercentDesc(): self
+    {
         return $this->orderBy('percent', 'DESC');
     }
 }

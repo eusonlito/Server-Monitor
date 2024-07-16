@@ -53,6 +53,6 @@ class Server extends BuilderAbstract
      */
     public function withMeasure(): self
     {
-        return $this->with(['measure' => static fn ($q) => $q->withAppCpu()->withAppMemory()->withDisk()]);
+        return $this->with(['measure' => static fn ($q) => $q->withAppCpu()->withAppMemory()->withDisk()->list()]);
     }
 }
