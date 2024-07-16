@@ -132,12 +132,8 @@ abstract class ParserAbstract
      */
     protected function time(string $value): int
     {
-        if (preg_match('/^([0-9]+):([0-9]{2})\.([0-9]{2})$/', $value, $matches) === 0) {
-            return 0;
-        }
-
-        return ($matches[1] * 3600)
-            + ($matches[2] * 60)
-            + intval(round($matches[3] / 100, 0));
+        return preg_match('/^([0-9]+):([0-9]{2})(?:\.([0-9]{2}))?$/', $value, $matches)
+            ? (($matches[1] * 60) + $matches[2])
+            : 0;
     }
 }
