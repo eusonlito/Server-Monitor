@@ -31,7 +31,7 @@ class Uptime extends ParserAbstract
     /**
      * @return string
      */
-    public function parseExp(): string
+    protected function parseExp(): string
     {
         return '/^([0-9]+\.[0-9]+) ([0-9]+\.[0-9]+)$/';
     }

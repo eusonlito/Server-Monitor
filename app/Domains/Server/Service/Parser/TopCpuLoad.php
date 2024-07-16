@@ -32,7 +32,7 @@ class TopCpuLoad extends ParserAbstract
     /**
      * @return string
      */
-    public function parseExp(): string
+    protected function parseExp(): string
     {
         return '/load average: ([0-9]+[,\.][0-9]+),\s*([0-9]+[,\.][0-9]+),\s*([0-9]+[,\.][0-9]+)/';
     }

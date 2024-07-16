@@ -46,7 +46,7 @@ class TopSwap extends ParserAbstract
     /**
      * @return string
      */
-    public function parseExp(): string
+    protected function parseExp(): string
     {
         return '/(K|M|G)iB Swap\s*:\s*([0-9]+(?:[,.][0-9]+)?)\s*total,\s*([0-9]+(?:[,.][0-9]+)?)\s*free,\s*([0-9]+(?:[,.][0-9]+)?)\s*used/';
     }

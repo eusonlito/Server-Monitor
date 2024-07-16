@@ -29,9 +29,16 @@ class TopMemory extends ParserAbstract
         };
 
         $total = $this->float($matches[2]) * $mult;
-        $free = $this->float($matches[3]) * $mult;
-        $used = $this->float($matches[4]) * $mult;
-        $buffer = $this->float($matches[5]) * $mult;
+
+        if ($matches[4] === 'free') {
+            $free = $this->float($matches[3]) * $mult;
+            $used = $this->float($matches[5]) * $mult;
+        } else {
+            $free = $this->float($matches[3]) * $mult;
+            $used = $this->float($matches[5]) * $mult;
+        }
+
+        $buffer = $this->float($matches[7]) * $mult;
         $available = $total - $used;
         $percent = intval(round($used / $total * 100));
 
@@ -48,8 +55,8 @@ class TopMemory extends ParserAbstract
     /**
      * @return string
      */
-    public function parseExp(): string
+    protected function parseExp(): string
     {
-        return '/(K|M|G)iB Mem\s*:\s*([0-9]+(?:[,.][0-9]+)?)\s*total,\s*([0-9]+(?:[,.][0-9]+)?)\s*free,\s*([0-9]+(?:[,.][0-9]+)?)\s*used,\s*([0-9]+(?:[,.][0-9]+)?)\s*buff/';
+        return '/(K|M|G)iB Mem\s*:\s*([0-9]+(?:[,.][0-9]+)?)\s*total,\s*([0-9]+(?:[,.][0-9]+)?)\s*(free|used),\s*([0-9]+(?:[,.][0-9]+)?)\s*(free|used),\s*([0-9]+(?:[,.][0-9]+)?)\s*buff/';
     }
 }

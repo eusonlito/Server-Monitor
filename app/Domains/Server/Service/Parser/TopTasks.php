@@ -34,7 +34,7 @@ class TopTasks extends ParserAbstract
     /**
      * @return string
      */
-    public function parseExp(): string
+    protected function parseExp(): string
     {
         return '/Tasks: ([0-9]+) total,\s+([0-9]+) running,\s+([0-9]+) sleeping,\s+([0-9]+) stopped,\s+([0-9]+) zombie/';
     }
