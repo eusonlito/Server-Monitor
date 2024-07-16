@@ -30,7 +30,7 @@ trait Date
         $s = $seconds % 60;
         $m = floor(($seconds % 3600) / 60);
         $h = floor(($seconds % 86400) / 3600);
-        $d = floor(($seconds % 2592000) / 86400);
+        $d = intval($seconds / 86400);
 
         $human = [];
 
