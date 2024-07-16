@@ -7,6 +7,16 @@
     <div class="col-span-12 lg:col-span-6">
         <div class="box mt-5">
             <h2 class="block border-b text-base font-medium px-5 py-2">
+                {{ __('server-update-measure-update.uptime') }}
+            </h2>
+
+            <div class="p-5">
+                @timeDateHuman($measure->uptime)
+            </div>
+        </div>
+
+        <div class="box mt-5">
+            <h2 class="block border-b text-base font-medium px-5 py-2">
                 {{ __('server-update-measure-update.cpu') }}
             </h2>
 
@@ -14,10 +24,10 @@
                 <div class="flex">
                     <div class="font-medium">
                         {{ $measure->cpu_load_1 }}
-                        |
                         {{ $measure->cpu_load_5 }}
-                        |
                         {{ $measure->cpu_load_15 }}
+                        /
+                        {{ $measure->cores }}
                     </div>
 
                     @progressbar($measure->cpu_percent, 'flex-1 h-5 ml-5')
@@ -112,7 +122,7 @@
                                 <td data-table-sort-value="{{ $each->memory_virtual }}">@sizeHuman($each->memory_virtual)</td>
                                 <td data-table-sort-value="{{ $each->memory_resident }}">@sizeHuman($each->memory_resident)</td>
                                 <td>{{ $each->cpu_load }}</td>
-                                <td data-table-sort-value="{{ $each->time }}">@secondsToTime($each->time)</td>
+                                <td data-table-sort-value="{{ $each->time }}">@timeHuman($each->time)</td>
                             </tr>
 
                             @endforeach

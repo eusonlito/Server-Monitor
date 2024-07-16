@@ -1,6 +1,5 @@
 <?php return [
     'create' => 'Crear',
-    'created_at' => 'Creado',
     'dashboard' => 'Dashboard',
     'enabled' => 'Activo',
     'filter' => 'Filtrar...',

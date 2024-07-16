@@ -4,4 +4,5 @@
     'disks' => 'Discos',
     'memory' => 'Memoria',
     'meta-title' => 'Servidores > :title > Registros > Detalle',
+    'uptime' => 'Tiempo de Actividad',
 ];

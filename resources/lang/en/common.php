@@ -1,6 +1,9 @@
 <?php return [
+    'and' => 'y',
     'close' => 'Close',
     'copy' => 'Copy',
+    'day' => 'Day',
+    'days' => 'Days',
     'error' => [
         'method-not-allowed' => 'Method Not Allowed',
         'not-found' => 'Not Found',
@@ -14,6 +17,12 @@
         'date_start' => 'Start',
     ],
     'generate' => 'Generate',
+    'hour' => 'Hour',
+    'hours' => 'Hours',
+    'minute' => 'Minute',
+    'minutes' => 'Minutes',
     'reset' => 'Reset',
+    'second' => 'Second',
+    'seconds' => 'Seconds',
     'show' => 'Show',
 ];

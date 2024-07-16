@@ -64,10 +64,6 @@ class View extends ServiceProvider
             return "<?= helper()->query($expression); ?>";
         });
 
-        Blade::directive('secondsToTime', function (string $expression) {
-            return "<?= helper()->secondsToTime($expression); ?>";
-        });
-
         Blade::directive('sizeHuman', function (string $expression) {
             return "<?= helper()->sizeHuman($expression); ?>";
         });
@@ -82,6 +78,14 @@ class View extends ServiceProvider
 
         Blade::directive('thOrder', function (string $expression) {
             return "<?= \App\Services\Html\Html::thOrder($expression); ?>";
+        });
+
+        Blade::directive('timeHuman', function (string $expression) {
+            return "<?= helper()->timeHuman($expression); ?>";
+        });
+
+        Blade::directive('timeDateHuman', function (string $expression) {
+            return "<?= helper()->timeDateHuman($expression); ?>";
         });
     }
 }

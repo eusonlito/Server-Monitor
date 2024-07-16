@@ -20,6 +20,58 @@ trait Date
     }
 
     /**
+     * @param int $seconds
+     * @param string $default = '-'
+     *
+     * @return string
+     */
+    public function timeDateHuman(int $seconds, string $default = '-'): string
+    {
+        $s = $seconds % 60;
+        $m = floor(($seconds % 3600) / 60);
+        $h = floor(($seconds % 86400) / 3600);
+        $d = floor(($seconds % 2592000) / 86400);
+
+        $human = [];
+
+        if ($d === 1) {
+            $human[] = '1 '.__('common.day');
+        } elseif ($d) {
+            $human[] = $d.' '.__('common.days');
+        }
+
+        if ($h === 1) {
+            $human[] = '1 '.__('common.hour');
+        } elseif ($h) {
+            $human[] = $h.' '.__('common.hours');
+        }
+
+        if ($m === 1) {
+            $human[] = '1 '.__('common.minute');
+        } elseif ($m) {
+            $human[] = $m.' '.__('common.minutes');
+        }
+
+        if ($s === 1) {
+            $human[] = '1 '.__('common.second');
+        } elseif ($s) {
+            $human[] = $s.' '.__('common.seconds');
+        }
+
+        if (empty($human)) {
+            return $default;
+        }
+
+        $last = array_pop($human);
+
+        if (empty($human)) {
+            return strtolower($last);
+        }
+
+        return strtolower(implode(', ', $human).' '.__('common.and').' '.$last);
+    }
+
+    /**
      * @param int|string|null $date
      * @param bool $hour = true
      * @param bool $second = false
@@ -262,21 +314,5 @@ trait Date
             range(1, 12),
             array_map(static fn ($index) => $format($index), range(1, 12))
         );
-    }
-
-    /**
-     * @param int $seconds
-     *
-     * @return string
-     */
-    public function secondsToTime(int $seconds): string
-    {
-        $hours = intdiv($seconds, 3600);
-        $seconds %= 3600;
-
-        $minutes = intdiv($seconds, 60);
-        $seconds %= 60;
-
-        return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
 }

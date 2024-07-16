@@ -80,7 +80,7 @@ return new class extends MigrationAbstract {
             $table->unsignedBigInteger('memory_free');
             $table->unsignedBigInteger('memory_buffer');
             $table->unsignedBigInteger('memory_available');
-            $table->unsignedTinyInteger('memory_percent');
+            $table->unsignedTinyInteger('memory_percent')->index();
 
             $table->unsignedBigInteger('swap_total');
             $table->unsignedBigInteger('swap_used');
