@@ -130,6 +130,14 @@
             "@php ./vendor/bin/psalm --no-cache || true"
         ],
 
+        "setup": [
+            "Composer\\Config::disableProcessTimeout",
+            "touch storage/database/database.sqlite",
+            "echo n | cp -vip .env.example .env",
+            "@composer install --no-dev --optimize-autoloader --classmap-authoritative --ansi",
+            "@php artisan key:generate"
+        ],
+
         "translation": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan core:translation:fix --ansi",
