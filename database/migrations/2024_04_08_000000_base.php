@@ -156,6 +156,7 @@ return new class extends MigrationAbstract {
             $table->string('auth')->unique();
 
             $table->unsignedInteger('order')->default(0);
+            $table->unsignedInteger('measure_purge_days')->default(0);
 
             $table->boolean('enabled')->default(0);
             $table->boolean('dashboard')->default(0);

@@ -12,6 +12,7 @@ class Update extends CreateUpdateAbstract
         $this->row->name = $this->data['name'];
         $this->row->ip = $this->data['ip'];
         $this->row->auth = $this->data['auth'];
+        $this->row->measure_purge_days = $this->data['measure_purge_days'];
         $this->row->enabled = $this->data['enabled'];
         $this->row->dashboard = $this->data['dashboard'];
         $this->row->updated_at = date('Y-m-d H:i:s');

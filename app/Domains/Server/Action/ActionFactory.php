@@ -45,6 +45,22 @@ class ActionFactory extends ActionFactoryAbstract
     }
 
     /**
+     * @return \App\Domains\Server\Model\Server
+     */
+    public function measurePurge(): Model
+    {
+        return $this->actionHandle(MeasurePurge::class);
+    }
+
+    /**
+     * @return void
+     */
+    public function measurePurgeAll(): void
+    {
+        $this->actionHandle(MeasurePurgeAll::class);
+    }
+
+    /**
      * @return void
      */
     public function order(): void

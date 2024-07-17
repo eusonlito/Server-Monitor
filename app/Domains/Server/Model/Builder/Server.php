@@ -39,6 +39,14 @@ class Server extends BuilderAbstract
     }
 
     /**
+     * @return self
+     */
+    public function whenMeasurePurgeDays(): self
+    {
+        return $this->where('measure_purge_days', '>', '0');
+    }
+
+    /**
      * @param bool $dashboard = true
      *
      * @return self
