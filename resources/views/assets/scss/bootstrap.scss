@@ -58,6 +58,7 @@ select {
 }
 
 .wrapper .wrapper-box .content {
+    min-height: calc(100vh - 1.6rem);
     border-radius: 1.3rem;
 
     @media (max-width: 767px) {
