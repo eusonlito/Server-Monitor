@@ -17,35 +17,35 @@ git clone https://github.com/eusonlito/Server-Monitor.git
 ./composer setup
 ```
 
-2. Edit the `.env` file and fill in the necessary variables.
+3. Edit the `.env` file and fill in the necessary variables.
 
 ```bash
 vi .env
 ```
 
-3. Launch the deploy
+4. Launch the deploy
 
 ```bash
 ./composer deploy
 ```
 
-4. Configure the cron job for the user related to the project.
+5. Configure the cron job for the user related to the project.
 
 ```
 * * * * * cd /var/www/monitor.domain.com && install -d storage/logs/artisan/$(date +"\%Y/\%m/\%d") && /usr/bin/php artisan schedule:run >> storage/logs/artisan/$(date +"\%Y/\%m/\%d")/schedule-run.log 2>&1
 ```
 
-5. Create the main user.
+6. Create the main user.
 
 ```bash
 php artisan user:create --email=user@domain.com --name=Admin --password=StrongPassword2 --enabled
 ```
 
-6. Configure the web server `DocumentRoot` to `/var/www/project/public`.
+7. Configure the web server `DocumentRoot` to `/var/www/project/public`.
 
-7. Create your first server.
+8. Create your first server.
 
-8. Connect to remote server and download the client script (never as root).
+9. Connect to remote server and download the client script (never as root).
 
 ```bash
 curl -H "Authorization: Bearer AUTH_TOKEN" \
@@ -55,15 +55,15 @@ curl -H "Authorization: Bearer AUTH_TOKEN" \
 chmod 755 server-monitor.sh
 ```
 
-9. Verify that the script matches the one at https://github.com/eusonlito/Server-Monitor/blob/master/resources/app/server/script
+10. Verify that the script matches the one at https://github.com/eusonlito/Server-Monitor/blob/master/resources/app/server/script
 
-10. Test the script (never as root).
+11. Test the script (never as root).
 
 ```bash
 ./server-monitor.sh
 ```
 
-11. Add the script to cron jobs (never as root).
+12. Add the script to cron jobs (never as root).
 
 ```
 * * * * * cd /script/path && ./server-monitor.sh >> server-monitor.log 2>&1
