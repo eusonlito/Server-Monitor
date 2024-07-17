@@ -13,11 +13,11 @@
 
     <div class="lg:flex font-medium text-center whitespace-nowrap overflow-auto">
         <div class="flex-1 flex lg:block p-2 lg:p-4 items-center content-center">
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 @icon('zap')
             </div>
 
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 <span class="inline-block align-middle">@sizeHuman($measure->memory_used)</span>
                 <span class="inline-block align-middle">/</span>
                 <span class="inline-block align-middle">@sizeHuman($measure->memory_total)</span>
@@ -33,11 +33,11 @@
         </div>
 
         <div class="flex-1 flex lg:block p-2 lg:p-4 items-center content-center">
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 @icon('cpu')
             </div>
 
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 <span class="inline-block align-middle">{{ $measure->cpu_load_1 }} {{ $measure->cpu_load_5 }} {{ $measure->cpu_load_15 }}</span>
                 <span class="inline-block align-middle">/</span>
                 <span class="inline-block align-middle">{{ $measure->cores }}</span>
@@ -55,11 +55,11 @@
         @if ($disk)
 
         <div class="flex-1 flex lg:block p-2 lg:p-4 items-center content-center">
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 @icon('hard-drive')
             </div>
 
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 <span class="inline-block align-middle">@sizeHuman($disk->used)</span>
                 <span class="inline-block align-middle">/</span>
                 <span class="inline-block align-middle">@sizeHuman($disk->size)</span>
@@ -79,12 +79,12 @@
         @if ($appCpu)
 
         <div class="flex-1 flex lg:block p-2 lg:p-4 items-center content-center">
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 @icon('terminal')
                 @icon('cpu', 'hidden lg:inline')
             </div>
 
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 <span class="inline-block align-middle">{{ $appCpu->command }}</span>
                 <span class="inline-block align-middle">|</span>
                 <span class="inline-block align-middle">{{ $appCpu->cpu_load }}</span>
@@ -104,12 +104,12 @@
         @if ($appMemory)
 
         <div class="flex-1 flex lg:block p-2 lg:p-4 items-center content-center">
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 @icon('terminal')
                 @icon('zap', 'hidden lg:inline')
             </div>
 
-            <div class="lg:pb-4 mr-3 lg:mr-0">
+            <div class="lg:pb-2 mr-3 lg:mr-0">
                 <span class="inline-block align-middle">{{ $appMemory->command }}</span>
                 <span class="inline-block align-middle">|</span>
                 <span class="inline-block align-middle">@sizeHuman($appMemory->memory_resident)</span>
