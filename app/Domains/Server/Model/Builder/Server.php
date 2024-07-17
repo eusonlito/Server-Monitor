@@ -41,9 +41,9 @@ class Server extends BuilderAbstract
     /**
      * @return self
      */
-    public function whenMeasurePurgeDays(): self
+    public function whenMeasureRetention(): self
     {
-        return $this->where('measure_purge_days', '>', '0');
+        return $this->where('measure_retention', '>', '0');
     }
 
     /**

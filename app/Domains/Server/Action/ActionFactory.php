@@ -47,17 +47,17 @@ class ActionFactory extends ActionFactoryAbstract
     /**
      * @return \App\Domains\Server\Model\Server
      */
-    public function measurePurge(): Model
+    public function measureRetention(): Model
     {
-        return $this->actionHandle(MeasurePurge::class);
+        return $this->actionHandle(MeasureRetention::class);
     }
 
     /**
      * @return void
      */
-    public function measurePurgeAll(): void
+    public function measureRetentionAll(): void
     {
-        $this->actionHandle(MeasurePurgeAll::class);
+        $this->actionHandle(MeasureRetentionAll::class);
     }
 
     /**

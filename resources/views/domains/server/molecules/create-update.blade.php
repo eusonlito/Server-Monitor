@@ -10,8 +10,8 @@
     </div>
 
     <div class="p-2">
-        <label for="server-measure_purge_days" class="form-label">{{ __('server-create.measure_purge_days') }}</label>
-        <input type="number" name="measure_purge_days" class="form-control form-control-lg" id="server-measure_purge_days" step="1" value="{{ $REQUEST->input('measure_purge_days') }}">
+        <label for="server-measure_retention" class="form-label">{{ __('server-create.measure_retention') }}</label>
+        <input type="number" name="measure_retention" class="form-control form-control-lg" id="server-measure_retention" step="1" value="{{ $REQUEST->input('measure_retention') }}">
     </div>
 
     <div class="p-2">

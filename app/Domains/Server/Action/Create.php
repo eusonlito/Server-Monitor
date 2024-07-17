@@ -15,7 +15,7 @@ class Create extends CreateUpdateAbstract
             'name' => $this->data['name'],
             'ip' => $this->data['ip'],
             'auth' => $this->data['auth'],
-            'measure_purge_days' => $this->data['measure_purge_days'],
+            'measure_retention' => $this->data['measure_retention'],
             'enabled' => $this->data['enabled'],
             'dashboard' => $this->data['dashboard'],
         ]);

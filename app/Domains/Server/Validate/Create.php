@@ -15,7 +15,7 @@ class Create extends ValidateAbstract
             'name' => ['bail', 'string', 'required'],
             'ip' => ['bail', 'string'],
             'auth' => ['bail', 'uuid', 'required'],
-            'measure_purge_days' => ['bail', 'integer'],
+            'measure_retention' => ['bail', 'integer'],
             'enabled' => ['bail', 'boolean'],
             'dashboard' => ['bail', 'boolean'],
         ];

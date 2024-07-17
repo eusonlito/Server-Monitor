@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as KernelVendor;
 use App\Domains\CoreMaintenance\Schedule\Manager as CoreMaintenanceScheduleManager;
+use App\Domains\Server\Schedule\Manager as ServerScheduleManager;
 use App\Domains\SQLite\Schedule\Manager as SQLiteScheduleManager;
 
 class Kernel extends KernelVendor
@@ -27,6 +28,7 @@ class Kernel extends KernelVendor
     protected function schedule(Schedule $schedule): void
     {
         CoreMaintenanceScheduleManager::new($schedule)->handle();
+        ServerScheduleManager::new($schedule)->handle();
         SQLiteScheduleManager::new($schedule)->handle();
 
         $this->scheduleQueue($schedule);

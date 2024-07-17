@@ -51,14 +51,14 @@ return new class extends MigrationAbstract {
             $table->string('ip')->nullable()->index();
 
             $table->string('related_table')->index();
-            $table->unsignedBigInteger('related_id')->nullable()->index()->nullable();
+            $table->unsignedBigInteger('related_id')->index()->nullable()->nullable();
 
             $table->json('payload')->nullable();
 
             $this->dateTimeCreatedAt($table);
 
-            $table->unsignedBigInteger('log_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('log_id')->index()->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
         });
 
         Schema::create('measure', function (Blueprint $table) {
@@ -95,10 +95,10 @@ return new class extends MigrationAbstract {
 
             $this->dateTimeCreatedAt($table);
 
-            $table->unsignedBigInteger('measure_app_cpu_id')->nullable();
-            $table->unsignedBigInteger('measure_app_memory_id')->nullable();
-            $table->unsignedBigInteger('measure_disk_id')->nullable();
-            $table->unsignedBigInteger('server_id');
+            $table->unsignedBigInteger('measure_app_cpu_id')->index()->nullable();
+            $table->unsignedBigInteger('measure_app_memory_id')->index()->nullable();
+            $table->unsignedBigInteger('measure_disk_id')->index()->nullable();
+            $table->unsignedBigInteger('server_id')->index();
         });
 
         Schema::create('measure_app', function (Blueprint $table) {
@@ -116,7 +116,7 @@ return new class extends MigrationAbstract {
 
             $this->dateTimeCreatedAt($table);
 
-            $table->unsignedBigInteger('measure_id');
+            $table->unsignedBigInteger('measure_id')->index();
         });
 
         Schema::create('measure_disk', function (Blueprint $table) {
@@ -131,7 +131,7 @@ return new class extends MigrationAbstract {
 
             $this->dateTimeCreatedAt($table);
 
-            $table->unsignedBigInteger('measure_id');
+            $table->unsignedBigInteger('measure_id')->index();
         });
 
         Schema::create('queue_fail', function (Blueprint $table) {
@@ -156,15 +156,15 @@ return new class extends MigrationAbstract {
             $table->string('auth')->unique();
 
             $table->unsignedInteger('order')->default(0);
-            $table->unsignedInteger('measure_purge_days')->default(0);
+            $table->unsignedInteger('measure_retention')->default(0);
 
             $table->boolean('enabled')->default(0);
             $table->boolean('dashboard')->default(0);
 
             $this->timestamps($table);
 
-            $table->unsignedBigInteger('measure_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('measure_id')->index()->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
         });
 
         Schema::create('user', function (Blueprint $table) {
@@ -179,7 +179,7 @@ return new class extends MigrationAbstract {
 
             $this->timestamps($table);
 
-            $table->unsignedBigInteger('language_id');
+            $table->unsignedBigInteger('language_id')->index();
         });
 
         Schema::create('user_code', function (Blueprint $table) {
@@ -195,7 +195,7 @@ return new class extends MigrationAbstract {
 
             $this->timestamps($table);
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->index();
         });
 
         Schema::create('user_fail', function (Blueprint $table) {
@@ -207,7 +207,7 @@ return new class extends MigrationAbstract {
 
             $this->dateTimeCreatedAt($table);
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
         });
 
         Schema::create('user_session', function (Blueprint $table) {
@@ -218,7 +218,7 @@ return new class extends MigrationAbstract {
 
             $this->dateTimeCreatedAt($table);
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
         });
     }
 
