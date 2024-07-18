@@ -60,7 +60,7 @@ class MeasureCreate extends ActionAbstract
      */
     protected function dataTop(): void
     {
-        $parser = TopParser::new($this->data['top']);
+        $parser = TopParser::new($this->data['top'], $this->data['cores']);
 
         $this->data['apps'] = $parser->apps();
         $this->data['cpu_load'] = $parser->cpuLoad();

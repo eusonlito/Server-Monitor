@@ -2,23 +2,14 @@
 
 namespace App\Domains\Server\Service\Parser;
 
-class Top extends ParserAbstract
+class Top extends TopAbstract
 {
-    /**
-     * @param string $top
-     *
-     * @return void
-     */
-    public function __construct(protected string $top)
-    {
-    }
-
     /**
      * @return array
      */
     public function apps(): array
     {
-        return TopApps::new($this->top)->parse();
+        return TopApps::new($this->top, $this->cores)->parse();
     }
 
     /**
@@ -26,7 +17,7 @@ class Top extends ParserAbstract
      */
     public function cpuLoad(): array
     {
-        return TopCpuLoad::new($this->top)->parse();
+        return TopCpuLoad::new($this->top, $this->cores)->parse();
     }
 
     /**
@@ -34,7 +25,7 @@ class Top extends ParserAbstract
      */
     public function tasks(): array
     {
-        return TopTasks::new($this->top)->parse();
+        return TopTasks::new($this->top, $this->cores)->parse();
     }
 
     /**
@@ -42,7 +33,7 @@ class Top extends ParserAbstract
      */
     public function memory(): array
     {
-        return TopMemory::new($this->top)->parse();
+        return TopMemory::new($this->top, $this->cores)->parse();
     }
 
     /**
@@ -50,6 +41,6 @@ class Top extends ParserAbstract
      */
     public function swap(): array
     {
-        return TopSwap::new($this->top)->parse();
+        return TopSwap::new($this->top, $this->cores)->parse();
     }
 }

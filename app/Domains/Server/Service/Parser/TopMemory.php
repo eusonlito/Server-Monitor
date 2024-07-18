@@ -2,17 +2,8 @@
 
 namespace App\Domains\Server\Service\Parser;
 
-class TopMemory extends ParserAbstract
+class TopMemory extends TopAbstract
 {
-    /**
-     * @param string $top
-     *
-     * @return void
-     */
-    public function __construct(protected string $top)
-    {
-    }
-
     /**
      * @return array
      */

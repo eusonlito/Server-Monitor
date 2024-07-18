@@ -2,17 +2,8 @@
 
 namespace App\Domains\Server\Service\Parser;
 
-class TopApps extends ParserAbstract
+class TopApps extends TopAbstract
 {
-    /**
-     * @param string $top
-     *
-     * @return void
-     */
-    public function __construct(protected string $top)
-    {
-    }
-
     /**
      * @return array
      */
@@ -39,14 +30,19 @@ class TopApps extends ParserAbstract
 
             if (empty($lines[$index])) {
                 $lines[$index] = $line;
+
+                continue;
             }
 
-            $lines[$index]['cpu_percent'] += $line['cpu_load'];
-            $lines[$index]['count']++;
+            $lines[$index]['memory_virtual'] += $line['memory_virtual'];
+            $lines[$index]['memory_resident'] += $line['memory_resident'];
+            $lines[$index]['shared'] += $line['shared'];
+            $lines[$index]['cpu_load'] += $line['cpu_load'];
+            $lines[$index]['memory_percent'] += $line['memory_percent'];
         }
 
         foreach ($lines as $index => $app) {
-            $lines[$index]['cpu_percent'] = round($app['cpu_percent'] / $app['count'], 2);
+            $lines[$index]['cpu_percent'] = round($app['cpu_load'] / $this->cores, 2);
         }
 
         return $lines;
@@ -84,8 +80,6 @@ class TopApps extends ParserAbstract
             'memory_percent' => $this->float($line[9] ?? ''),
             'time' => $this->time($line[10] ?? ''),
             'command' => ($line[11] ?? ''),
-            'cpu_percent' => 0,
-            'count' => 0,
         ];
     }
 
@@ -100,7 +94,7 @@ class TopApps extends ParserAbstract
             && $line['user']
             && $line['memory_virtual']
             && $line['memory_resident']
-            && ($line['memory_percent'] || $line['cpu_percent'])
+            && ($line['memory_percent'] || $line['cpu_load'])
             && ($line['command'] !== 'top');
     }
 

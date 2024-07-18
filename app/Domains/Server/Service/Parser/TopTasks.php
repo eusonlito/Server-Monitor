@@ -2,17 +2,8 @@
 
 namespace App\Domains\Server\Service\Parser;
 
-class TopTasks extends ParserAbstract
+class TopTasks extends TopAbstract
 {
-    /**
-     * @param string $top
-     *
-     * @return void
-     */
-    public function __construct(protected string $top)
-    {
-    }
-
     /**
      * @return array
      */

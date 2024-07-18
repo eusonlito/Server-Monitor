@@ -12,10 +12,10 @@ class MeasureCreate extends ValidateAbstract
     public function rules(): array
     {
         return [
-            'top' => ['bail'],
-            'df' => ['bail'],
-            'cores' => ['bail'],
-            'uptime' => ['bail'],
+            'top' => ['bail', 'string'],
+            'df' => ['bail', 'string'],
+            'cores' => ['bail', 'integer'],
+            'uptime' => ['bail', 'string'],
         ];
     }
 }
