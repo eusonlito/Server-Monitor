@@ -39,6 +39,7 @@ class TopApps extends TopAbstract
             $lines[$index]['shared'] += $line['shared'];
             $lines[$index]['cpu_load'] += $line['cpu_load'];
             $lines[$index]['memory_percent'] += $line['memory_percent'];
+            $lines[$index]['time'] += $line['time'];
         }
 
         foreach ($lines as $index => $app) {
