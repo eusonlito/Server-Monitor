@@ -4,11 +4,9 @@ namespace App\Domains\Server\Service\Controller;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use App\Domains\Measure\Model\Measure as MeasureModel;
 use App\Domains\Server\Model\Server as Model;
 
-class UpdateMeasure extends ControllerAbstract
+class Update extends ControllerAbstract
 {
     /**
      * @param \Illuminate\Http\Request $request
@@ -29,23 +27,6 @@ class UpdateMeasure extends ControllerAbstract
         return [
             'row' => $this->row,
             'setup' => $this->setup(),
-            'measures' => $this->measures(),
         ];
-    }
-
-    /**
-     * @return \Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function measures(): LengthAwarePaginator
-    {
-        return MeasureModel::query()
-            ->byServerId($this->row->id)
-            ->byRequest($this->request)
-            ->whenOrder($this->requestString('order_column'), $this->requestString('order_mode'))
-            ->withAppCpu()
-            ->withAppMemory()
-            ->withDisk()
-            ->list()
-            ->paginate(20);
     }
 }

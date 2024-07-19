@@ -4,6 +4,7 @@ namespace App\Domains\Server\Controller;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use App\Domains\Server\Service\Controller\Update as ControllerService;
 
 class Update extends ControllerAbstract
 {
@@ -24,9 +25,15 @@ class Update extends ControllerAbstract
 
         $this->meta('title', __('server-update.meta-title', ['title' => $this->row->name]));
 
-        return $this->page('server.update', [
-            'row' => $this->row,
-        ]);
+        return $this->page('server.update', $this->data());
+    }
+
+    /**
+     * @return array
+     */
+    protected function data(): array
+    {
+        return ControllerService::new($this->request, $this->auth, $this->row)->data();
     }
 
     /**

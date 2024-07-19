@@ -8,6 +8,7 @@
         'measures' => 'Records',
         'next' => 'Next',
         'previous' => 'Previous',
+        'setup' => 'Installation',
     ],
     'meta-title' => 'Servers > :title',
     'save' => 'Save',

@@ -13,6 +13,7 @@ Route::group(['middleware' => ['user-auth']], static function () {
     Route::any('/server/{id}/chart', UpdateChart::class)->name('server.update.chart');
     Route::any('/server/{id}/measure/{measure_id}', UpdateMeasureUpdate::class)->name('server.update.measure.update');
     Route::any('/server/{id}/measure', UpdateMeasure::class)->name('server.update.measure');
+    Route::any('/server/{id}/setup', UpdateSetup::class)->name('server.update.setup');
 });
 
 Route::group(['middleware' => ['server.auth']], static function () {

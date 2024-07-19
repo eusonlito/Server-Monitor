@@ -8,6 +8,7 @@
         'measures' => 'Registros',
         'next' => 'Siguiente',
         'previous' => 'Anterior',
+        'setup' => 'Instalación',
     ],
     'meta-title' => 'Servidores > :title',
     'save' => 'Guardar',

@@ -31,7 +31,6 @@ class UpdateChart extends ControllerAbstract
         $this->requestMerge([
             'date_start' => date('Y-m-d', strtotime('-1 day')),
         ]);
-
     }
 
     /**
@@ -41,6 +40,7 @@ class UpdateChart extends ControllerAbstract
     {
         return [
             'row' => $this->row,
+            'setup' => $this->setup(),
             'cpu' => $this->cpu(),
             'memory' => $this->memory(),
             'memory_max' => $this->memoryMax(),

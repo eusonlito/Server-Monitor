@@ -37,6 +37,7 @@ class UpdateMeasureUpdate extends ControllerAbstract
         return [
             'row' => $this->row,
             'measure' => $this->measure,
+            'setup' => false,
             'next' => $this->next(),
             'previous' => $this->previous(),
             'apps' => $this->apps(),
