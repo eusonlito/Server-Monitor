@@ -43,7 +43,7 @@ class TopApps extends TopAbstract
         }
 
         foreach ($lines as $index => $app) {
-            $lines[$index]['cpu_percent'] = round($app['cpu_load'] / $this->cores, 2);
+            $lines[$index]['cpu_percent'] = intval(round($app['cpu_load'] / $this->cores));
         }
 
         return $lines;
