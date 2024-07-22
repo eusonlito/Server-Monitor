@@ -297,7 +297,7 @@ charts.push({
         <div class="mb-3">
             <div class="flex">
                 <div class="flex-1 font-medium">{{ $each->mount }}</div>
-                <div class="text-slate-500">@sizeHuman($each->used) / @sizeHuman($each->size)</div>
+                <div class="text-slate-500">@sizeHuman($each->size) - @sizeHuman($each->used) = @sizeHuman($each->available)</div>
             </div>
 
             <div class="flex mt-2 items-center">

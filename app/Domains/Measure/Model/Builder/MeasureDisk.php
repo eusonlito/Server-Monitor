@@ -70,6 +70,7 @@ class MeasureDisk extends BuilderAbstract
             'id',
             'used',
             'size',
+            'available',
             'percent',
             'measure_id',
         ]));
