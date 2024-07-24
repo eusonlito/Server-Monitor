@@ -3,7 +3,7 @@
     'create' => 'Create',
     'created_at' => 'Created',
     'email' => 'Email',
-    'enabled' => 'Active',
+    'enabled' => 'Enabled',
     'filter' => 'Filter...',
     'meta-title' => 'Users',
     'name' => 'Name',

@@ -1,7 +1,7 @@
 <?php return [
     'auth' => 'Authentication',
     'dashboard' => 'Dashboard',
-    'enabled' => 'Active',
+    'enabled' => 'Enabled',
     'error' => [
         'auth-exists' => 'Another server with the same authentication already exists',
         'name-exists' => 'Another server with the same name already exists',

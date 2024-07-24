@@ -1,7 +1,7 @@
 <?php return [
     'create' => 'Create',
     'dashboard' => 'Dashboard',
-    'enabled' => 'Active',
+    'enabled' => 'Enabled',
     'filter' => 'Filter...',
     'meta-title' => 'Servers',
     'name' => 'Name',

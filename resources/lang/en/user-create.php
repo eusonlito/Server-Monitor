@@ -1,6 +1,6 @@
 <?php return [
     'email' => 'Email',
-    'enabled' => 'Active',
+    'enabled' => 'Enabled',
     'error' => [
         'email-exists' => 'There is already another user with the same email address',
         'enabled-own' => 'It is not possible to deactivate your own user',
