@@ -4,6 +4,7 @@
     'delete-success' => 'The server has been successfully deleted',
     'delete-title' => 'Delete Server',
     'header' => [
+        'apps' => 'Apps',
         'charts' => 'Charts',
         'measures' => 'Records',
         'next' => 'Next',

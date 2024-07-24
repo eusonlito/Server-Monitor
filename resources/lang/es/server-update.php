@@ -4,6 +4,7 @@
     'delete-success' => 'El servidor ha sido borrado correctamente',
     'delete-title' => 'Borrar el Servidor',
     'header' => [
+        'apps' => 'Aplicaciones',
         'charts' => 'Gráficas',
         'measures' => 'Registros',
         'next' => 'Siguiente',

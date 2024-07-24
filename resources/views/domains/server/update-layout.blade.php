@@ -14,6 +14,7 @@
 
         <a href="{{ route('server.update.chart', $row->id) }}" class="p-4 {{ ($ROUTE === 'server.update.chart') ? 'active' : '' }}" role="tab">{{ __('server-update.header.charts') }}</a>
         <a href="{{ route('server.update.measure', $row->id) }}" class="p-4 {{ ($ROUTE === 'server.update.measure') ? 'active' : '' }}" role="tab">{{ __('server-update.header.measures') }}</a>
+        <a href="{{ route('server.update.measure-app', $row->id) }}" class="p-4 {{ ($ROUTE === 'server.update.measure-app') ? 'active' : '' }}" role="tab">{{ __('server-update.header.apps') }}</a>
 
         @if ($ROUTE === 'server.update.measure.update')
 
