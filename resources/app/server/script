@@ -19,7 +19,7 @@ data=$(jq -n \
   --arg uptime "$uptime" \
   '{"top": $top, "df": $df, "cores": $cores, "uptime": $uptime}')
 
-curl -k -X POST \
+curl -s -S -k -X POST \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer :TOKEN" \
