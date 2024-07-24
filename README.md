@@ -75,9 +75,10 @@ Updating the platform can be done in a simple way with the `./composer deploy` c
 
 # Screenshots
 
-![screencapture-server-monitor-01](https://github.com/user-attachments/assets/e908630f-8e59-4fcf-845b-a9827d3d91ac)
-![screencapture-server-monitor-02](https://github.com/user-attachments/assets/37c7b70e-3d34-4818-a909-10af54f73c89)
-![screencapture-server-monitor-03](https://github.com/user-attachments/assets/c250ca17-9a6e-4ece-b29a-a2f45b919621)
-![screencapture-server-monitor-04](https://github.com/user-attachments/assets/7002327a-9064-414d-b78a-f1e6574980ec)
-![screencapture-server-monitor-05](https://github.com/user-attachments/assets/2b529b6e-e2ab-4e5f-8b59-d81f3f1f460c)
-![screencapture-server-monitor-06](https://github.com/user-attachments/assets/249d6ce0-8672-4efa-9ebe-c6826388077a)
+![screencapture-server-monitor-01](https://github.com/user-attachments/assets/efb87670-3c70-43e0-b197-75ef6f4aa8a9)
+![screencapture-server-monitor-02](https://github.com/user-attachments/assets/f544d0c3-a3ac-41a5-9663-fe8df75ddd13)
+![screencapture-server-monitor-03](https://github.com/user-attachments/assets/e1729b8a-6125-4c95-83fc-d676cd6a5132)
+![screencapture-server-monitor-04](https://github.com/user-attachments/assets/1abe2917-f2a1-41a9-bbf4-407ac25b7f3c)
+![screencapture-server-monitor-05](https://github.com/user-attachments/assets/1536b162-2baf-4e07-969c-1fcfeedc97f1)
+![screencapture-server-monitor-06](https://github.com/user-attachments/assets/8ffa584f-3d19-44b4-a576-58dcaf30557b)
+
