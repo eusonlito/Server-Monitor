@@ -10,9 +10,25 @@ return new class extends MigrationAbstract {
      */
     public function up(): void
     {
+        $this->optimize();
         $this->tables();
         $this->keys();
-        $this->optimize();
+    }
+
+    /**
+     * @return void
+     */
+    protected function optimize(): void
+    {
+        $db = $this->db();
+
+        if ($db->getDriverName() !== 'sqlite') {
+            return;
+        }
+
+        $db->unprepared('PRAGMA journal_mode = WAL;');
+        $db->unprepared('PRAGMA synchronous = NORMAL;');
+        $db->unprepared('PRAGMA auto_vacuum = incremental;');
     }
 
     /**
@@ -270,17 +286,5 @@ return new class extends MigrationAbstract {
         Schema::table('user_session', function (Blueprint $table) {
             $this->foreignOnDeleteSetNull($table, 'user');
         });
-    }
-
-    /**
-     * @return void
-     */
-    protected function optimize(): void
-    {
-        $this->db()->unprepared('PRAGMA journal_mode = WAL;');
-        $this->db()->unprepared('PRAGMA synchronous = NORMAL;');
-        $this->db()->unprepared('PRAGMA page_size = 32768;');
-        $this->db()->unprepared('PRAGMA cache_size = -20000;');
-        $this->db()->unprepared('PRAGMA auto_vacuum = incremental;');
     }
 };

@@ -51,5 +51,5 @@ CREATE INDEX "user_session_ip_index" on "user_session" ("ip");
 CREATE INDEX "user_session_user_id_index" on "user_session" ("user_id");
 
 INSERT INTO migrations VALUES(1,'2024_04_08_000000_base',1);
-INSERT INTO migrations VALUES(2,'2024_07_17_180000_index',1);
-INSERT INTO migrations VALUES(3,'2024_07_17_180000_server_measure_retention',1);
+INSERT INTO migrations VALUES(2,'2024_07_17_120000_index',1);
+INSERT INTO migrations VALUES(3,'2024_07_17_123000_server_measure_retention',1);
