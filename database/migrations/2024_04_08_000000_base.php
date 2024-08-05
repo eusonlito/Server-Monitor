@@ -27,7 +27,6 @@ return new class extends MigrationAbstract {
         }
 
         $db->unprepared('PRAGMA journal_mode = WAL;');
-        $db->unprepared('PRAGMA synchronous = NORMAL;');
         $db->unprepared('PRAGMA auto_vacuum = incremental;');
     }
 
