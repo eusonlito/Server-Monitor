@@ -4,9 +4,13 @@
             {{ $server->name }}
         </a>
 
+        @if ($draggable)
+
         <div class="text-gray-400" data-draggable-handle>
             @icon('align-justify')
         </div>
+
+        @endif
     </div>
 
     @if ($measure)

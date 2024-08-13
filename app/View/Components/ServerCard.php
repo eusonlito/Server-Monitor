@@ -33,10 +33,11 @@ class ServerCard extends Component
 
     /**
      * @param \App\Domains\Server\Model\Server $server
+     * @param bool $draggable = true
      *
      * @return void
      */
-    public function __construct(public ServerModel $server)
+    public function __construct(public ServerModel $server, public bool $draggable = true)
     {
         $this->measure = $server->measure;
         $this->disk = $this->measure?->disk;

@@ -17,6 +17,17 @@ class Index extends ControllerAbstract
      */
     public function __construct(protected Request $request, protected Authenticatable $auth)
     {
+        $this->requestMergePreference();
+    }
+
+    /**
+     * @return void
+     */
+    protected function requestMergePreference(): void
+    {
+        $this->request->merge([
+            'order' => $this->auth->preference('dashboard-order', $this->request->input('order')),
+        ]);
     }
 
     /**
@@ -26,6 +37,8 @@ class Index extends ControllerAbstract
     {
         return [
             'servers' => $this->servers(),
+            'order_options' => $this->orderOptions(),
+            'order' => $this->request->input('order'),
         ];
     }
 
@@ -39,6 +52,37 @@ class Index extends ControllerAbstract
             ->whereDashboard()
             ->withMeasure()
             ->list()
-            ->get();
+            ->get()
+            ->pipe($this->serversOrder(...));
+    }
+
+    /**
+     * @param \App\Domains\Server\Model\Collection\Server $collection
+     *
+     * @return \App\Domains\Server\Model\Collection\Server
+     */
+    protected function serversOrder(ServerCollection $collection): ServerCollection
+    {
+        return match ($order = $this->request->input('order')) {
+            'name' => $collection->sortBy('name'),
+            'memory' => $collection->sortByDesc('measure.memory_percent'),
+            'cpu' => $collection->sortByDesc('measure.cpu_percent'),
+            'disk' => $collection->sortByDesc('measure.disk.percent'),
+            default => $collection,
+        };
+    }
+
+    /**
+     * @return array
+     */
+    protected function orderOptions(): array
+    {
+        return [
+            'name' => __('dashboard-index.order-name'),
+            'memory' => __('dashboard-index.order-memory'),
+            'cpu' => __('dashboard-index.order-cpu'),
+            'disk' => __('dashboard-index.order-disk'),
+            'manual' => __('dashboard-index.order-manual'),
+        ];
     }
 }

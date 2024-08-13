@@ -10,11 +10,13 @@ use App\Domains\CoreApp\Model\ModelAbstract;
 use App\Domains\Language\Model\Language as LanguageModel;
 use App\Domains\User\Model\Builder\User as Builder;
 use App\Domains\User\Model\Collection\User as Collection;
+use App\Domains\User\Model\Traits\Preferences as PreferencesTrait;
 use App\Domains\UserSession\Model\UserSession as UserSessionModel;
 
 class User extends ModelAbstract implements Authenticatable
 {
     use AuthenticatableTrait;
+    use PreferencesTrait;
 
     /**
      * @var string
@@ -35,6 +37,7 @@ class User extends ModelAbstract implements Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'preferences' => 'array',
         'enabled' => 'boolean',
     ];
 

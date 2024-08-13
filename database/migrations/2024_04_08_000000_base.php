@@ -190,6 +190,8 @@ return new class extends MigrationAbstract {
             $table->string('password');
             $table->string('remember_token')->nullable();
 
+            $table->jsonb('preferences')->nullable();
+
             $table->boolean('enabled')->default(0);
 
             $this->timestamps($table);
