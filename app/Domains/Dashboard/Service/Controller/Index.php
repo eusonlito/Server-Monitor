@@ -26,7 +26,7 @@ class Index extends ControllerAbstract
     protected function requestMergePreference(): void
     {
         $this->request->merge([
-            'order' => $this->auth->preference('dashboard-order', $this->request->input('order')),
+            'order' => $this->auth->preference('dashboard-order', $this->request->input('order'), 'manual'),
         ]);
     }
 
