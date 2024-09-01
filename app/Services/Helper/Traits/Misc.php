@@ -111,4 +111,21 @@ trait Misc
     {
         return str_slug($string, ' ');
     }
+
+    /**
+     * @param string $string
+     * @param float $a = 1
+     *
+     * @return string
+     */
+    public function stringToRGBA(string $string, float $a = 1): string
+    {
+        $hash = md5($string);
+
+        $r = hexdec(substr($hash, 0, 2));
+        $g = hexdec(substr($hash, 2, 2));
+        $b = hexdec(substr($hash, 4, 2));
+
+        return 'rgba('.$r.', '.$g.', '.$b.', '.$a.')';
+    }
 }

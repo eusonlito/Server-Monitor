@@ -2,5 +2,5 @@
     'cpu' => 'CPU',
     'disks' => 'Disks',
     'memory' => 'Memory',
-    'meta-title' => 'Servers > :title > Graphics',
+    'meta-title' => 'Servers > :title > Charts',
 ];

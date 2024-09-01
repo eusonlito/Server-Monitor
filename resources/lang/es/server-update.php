@@ -6,6 +6,7 @@
     'header' => [
         'apps' => 'Aplicaciones',
         'charts' => 'Gráficas',
+        'disks' => 'Discos',
         'measures' => 'Registros',
         'next' => 'Siguiente',
         'previous' => 'Anterior',

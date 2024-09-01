@@ -6,6 +6,7 @@
     'header' => [
         'apps' => 'Apps',
         'charts' => 'Charts',
+        'disks' => 'Disks',
         'measures' => 'Records',
         'next' => 'Next',
         'previous' => 'Previous',
