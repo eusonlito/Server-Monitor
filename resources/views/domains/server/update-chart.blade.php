@@ -167,7 +167,7 @@ charts.push({
                     order: 10,
 
                     type: 'line',
-                    label: 'Memory',
+                    label: 'Disk',
                     backgroundColor: 'rgba(163, 160, 36, 0.2)',
                     borderColor: 'rgba(163, 160, 36, 1)',
                     steppedLine: false,
