@@ -20,5 +20,11 @@
                 <directory name="app" />
             </errorLevel>
         </MissingTemplateParam>
+
+        <MissingOverrideAttribute errorLevel="info" />
+        <MissingPureAnnotation errorLevel="info" />
+        <MissingAbstractPureAnnotation errorLevel="info" />
+        <MissingInterfaceImmutableAnnotation errorLevel="info" />
+        <MissingImmutableAnnotation errorLevel="info" />
     </issueHandlers>
 </psalm>
