@@ -25,10 +25,10 @@
         "nunomaduro/phpinsights": "dev-master",
         "phpcompatibility/php-compatibility": "dev-develop",
         "phpunit/phpunit": "^11.0",
-        "psalm/plugin-laravel": "dev-master",
+        "psalm/plugin-laravel": "^4.3",
         "spatie/laravel-ignition": "dev-main",
         "squizlabs/php_codesniffer": "^3.7",
-        "vimeo/psalm": "^6.8"
+        "vimeo/psalm": "^7.0"
     },
     "config": {
         "optimize-autoloader": true,
