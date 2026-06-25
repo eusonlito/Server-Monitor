@@ -1,30 +1,41 @@
 #!/bin/bash
 
+set -euo pipefail
+
 export LC_ALL=C
 export LANG=C
 
 for cmd in jq curl top df nproc; do
-  if [ "$(command -v $cmd)" == "" ]; then
+  if ! command -v "$cmd" >/dev/null 2>&1; then
     echo "$cmd command not found"
     exit 1
   fi
 done
 
-top=$(top -b -w 512 -n 1)
-df=$(df -B1 | grep -v tmpfs)
-cores=$(nproc --all)
-uptime=$(cat /proc/uptime)
+tmpdir="$(mktemp -d)"
 
-data=$(jq -n \
-  --arg top "$top" \
-  --arg df "$df" \
-  --arg cores "$cores" \
+trap 'rm -rf "$tmpdir"' EXIT
+
+top -b -w 512 -n 1 > "$tmpdir/top"
+df -B1 | grep -v '^tmpfs' > "$tmpdir/df"
+
+cores="$(nproc --all)"
+uptime="$(cat /proc/uptime)"
+
+jq -n \
+  --rawfile top "$tmpdir/top" \
+  --rawfile df "$tmpdir/df" \
+  --argjson cores "$cores" \
   --arg uptime "$uptime" \
-  '{"top": $top, "df": $df, "cores": $cores, "uptime": $uptime}')
-
+  '{
+    top: $top,
+    df: $df,
+    cores: $cores,
+    uptime: $uptime
+  }' |
 curl -s -S -k -X POST \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer :TOKEN" \
-  -d "$data" \
-  :URL
+  --data-binary @- \
+  https://monitor.lito.com.es/server/measure
