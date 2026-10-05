@@ -1,0 +1,167 @@
+{
+  "scope": "Local complete production copy, server 1, date_start=2026-10-04",
+  "method": "Five alternating warm-cache trials. Baseline SQL uses the original single-column indexes to reproduce the measured original plans.",
+  "cases": {
+    "chart": {
+      "trials_ms": {
+        "before": [
+          398.113,
+          337.952,
+          336.368,
+          349.245,
+          374.734
+        ],
+        "after": [
+          68.883,
+          69.152,
+          72.528,
+          75.277,
+          68.92
+        ]
+      },
+      "median_ms": {
+        "before": 349.245,
+        "after": 69.152
+      },
+      "results_equal": true
+    },
+    "app": {
+      "trials_ms": {
+        "before": [
+          1462.827,
+          1457.276,
+          1433.448,
+          1446.659,
+          1451.097
+        ],
+        "after": [
+          256.894,
+          256.003,
+          257.549,
+          256.437,
+          261.384
+        ]
+      },
+      "median_ms": {
+        "before": 1451.097,
+        "after": 256.894
+      },
+      "results_equal": true
+    },
+    "disk": {
+      "trials_ms": {
+        "before": [
+          132.448,
+          132.465,
+          134.239,
+          136.177,
+          131.719
+        ],
+        "after": [
+          68.822,
+          66.011,
+          68.312,
+          65.459,
+          65.372
+        ]
+      },
+      "median_ms": {
+        "before": 132.465,
+        "after": 66.011
+      },
+      "results_equal": true
+    },
+    "measure": {
+      "trials_ms": {
+        "before": [
+          65.121,
+          64.98,
+          65.077,
+          64.612,
+          65.458
+        ],
+        "after": [
+          0.114,
+          0.047,
+          0.12,
+          0.048,
+          0.111
+        ]
+      },
+      "median_ms": {
+        "before": 65.077,
+        "after": 0.111
+      },
+      "results_equal": true
+    }
+  },
+  "new_index_bytes": {
+    "measure_app_measure_id_created_at_index": 1193480192,
+    "measure_disk_measure_id_created_at_index": 213872640,
+    "measure_server_id_created_at_index": 59019264
+  },
+  "local_user": "performance.local@example.test",
+  "production_deployed": false,
+  "changes": [
+    "Composite indexes for measure(server_id,created_at), measure_app(measure_id,created_at), measure_disk(measure_id,created_at)",
+    "Application statistics compare timestamps directly and use an exclusive next-day bound for date_end",
+    "Long charts retain representative extrema and endpoints with a 2000-point maximum per series",
+    "Count-based retention uses small autocommitted batches and pauses; hourly scheduled runs cannot overlap",
+    "Native VACUUM is available through the existing manual maintenance command; daily automatic vacuum was removed",
+    "The representative-points message and its translations were removed"
+  ],
+  "dashboard": {
+    "service_seconds": 0.0019,
+    "queries": 5
+  },
+  "validation": {
+    "phpunit_tests": 14,
+    "phpunit_assertions": 73,
+    "pint": "passed",
+    "browser_chart_canvases": 3,
+    "browser_application_date_filter_rows": 54,
+    "browser_long_range_points": [
+      1998,
+      1998,
+      1997
+    ],
+    "browser_chart_notice_present": false,
+    "browser_javascript_errors": [],
+    "schedule": "Both hourly commands and retention mutex verified with an array test cache. Native schedule:list cannot inspect the unavailable local Redis socket."
+  },
+  "resolved_findings": [
+    {
+      "path": "app/Domains/Server/Service/Controller/UpdateChart.php",
+      "finding": "Long ranges return every point without aggregation or a point budget",
+      "sample_date_start": "2026-01-01",
+      "points_per_series": 190441,
+      "php_peak_bytes": 180355072,
+      "resolution": "Charts stream rows and retain at most 2000 points per series, preserving segment minima and maxima and the first and last point. Short ranges retain every point.",
+      "after_points_per_series": {
+        "cpu": 1998,
+        "memory": 1998,
+        "disk": 1997
+      },
+      "after_php_peak_bytes": 31457280,
+      "service_seconds": {
+        "before": 0.6309,
+        "after": 0.9808
+      },
+      "measurement_note": "PHP heap allocation excludes SQLite file-backed mmap pages and is not total process RSS. Streaming reduces payload and PHP memory; this long-range service trial takes more server CPU time.",
+      "chart_notice_removed": true
+    },
+    {
+      "path": "app/Domains/Server/Action/MeasureRetention.php",
+      "finding": "Retention is a count per server and uses a single cascade DELETE, which can hold the SQLite writer lock during large cleanup",
+      "resolution": "Count-based retention is preserved. Deletes run in batches of at most 250 parent measures with a 200ms pause between batches. The hourly scheduled command uses Laravel withoutOverlapping.",
+      "validation": "A separate SQLite writer succeeds between each batch; foreign key cascades, retained records and other servers are preserved."
+    },
+    {
+      "path": "app/Domains/SQLite/Action/Vacuum.php",
+      "finding": "PRAGMA vacuum does not compact the database; fixture remained 2056192 bytes and native VACUUM reduced it to 8192 bytes. Real compaction requires a maintenance window",
+      "resolution": "The existing sqlite:vacuum command executes native VACUUM. Daily automatic vacuum was removed; compaction is manual during maintenance because it blocks writes.",
+      "validation": "The actual Artisan command reduces a temporary database file, preserves remaining rows, and passes quick_check."
+    }
+  ],
+  "remaining_findings": []
+}

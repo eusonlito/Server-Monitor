@@ -49,7 +49,7 @@ trait MeasureAppSql
         $filters = static::statsByServerIdFiltersDateStartFilters($filters);
 
         if ($filters['date_start']) {
-            $replacement = 'AND DATE("ma"."created_at") >= :date_start';
+            $replacement = 'AND "ma"."created_at" >= :date_start';
         } else {
             $replacement = '';
         }
@@ -85,7 +85,8 @@ trait MeasureAppSql
         $filters = static::statsByServerIdFiltersDateEndFilters($filters);
 
         if ($filters['date_end']) {
-            $replacement = 'AND DATE("ma"."created_at") >= :date_end';
+            $filters['date_end'] = date('Y-m-d', strtotime($filters['date_end'].' +1 day'));
+            $replacement = 'AND "ma"."created_at" < :date_end';
         } else {
             $replacement = '';
         }

@@ -12,7 +12,6 @@ class Manager extends ScheduleAbstract
     public function handle(): void
     {
         $this->optimize();
-        $this->vacuum();
     }
 
     /**
@@ -21,13 +20,5 @@ class Manager extends ScheduleAbstract
     protected function optimize(): void
     {
         $this->command('sqlite:optimize', 'sqlite-optimize')->hourly();
-    }
-
-    /**
-     * @return void
-     */
-    protected function vacuum(): void
-    {
-        $this->command('sqlite:vacuum', 'sqlite-vacuum')->daily();
     }
 }

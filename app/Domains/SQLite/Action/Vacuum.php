@@ -9,6 +9,6 @@ class Vacuum extends ActionAbstract
      */
     public function handle(): void
     {
-        $this->db()->unprepared('PRAGMA vacuum;');
+        $this->db()->unprepared('VACUUM;');
     }
 }

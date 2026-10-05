@@ -59,9 +59,7 @@ class UpdateChart extends ControllerAbstract
         return MeasureModel::query()
             ->byServerId($this->row->id)
             ->byRequest($this->request)
-            ->orderByFirst()
-            ->pluck('cpu_percent', 'created_at')
-            ->all();
+            ->chart('cpu_percent');
     }
 
     /**
@@ -80,9 +78,7 @@ class UpdateChart extends ControllerAbstract
         return MeasureModel::query()
             ->byServerId($this->row->id)
             ->byRequest($this->request)
-            ->orderByFirst()
-            ->pluck('memory_used', 'created_at')
-            ->all();
+            ->chart('memory_used');
     }
 
     /**
@@ -125,9 +121,7 @@ class UpdateChart extends ControllerAbstract
             ->byServerId($this->row->id)
             ->byMount($this->row->measure->disk->mount)
             ->byRequest($this->request)
-            ->orderByFirst()
-            ->pluck('used', 'created_at')
-            ->all();
+            ->chart('used');
     }
 
     /**

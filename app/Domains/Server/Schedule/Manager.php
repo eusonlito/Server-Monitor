@@ -19,6 +19,6 @@ class Manager extends ScheduleAbstract
      */
     protected function measureRetentionAll(): void
     {
-        $this->command('server:measure:retention:all', 'server-measure-retention-all')->hourly();
+        $this->command('server:measure:retention:all', 'server-measure-retention-all')->hourly()->withoutOverlapping();
     }
 }

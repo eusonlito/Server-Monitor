@@ -12,7 +12,7 @@ class Vacuum extends CommandAbstract
     /**
      * @var string
      */
-    protected $description = 'Vacuum SQLite';
+    protected $description = 'Vacuum SQLite during maintenance (blocks writes)';
 
     /**
      * @return void

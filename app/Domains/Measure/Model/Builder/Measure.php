@@ -5,9 +5,12 @@ namespace App\Domains\Measure\Model\Builder;
 use Illuminate\Http\Request;
 use App\Domains\CoreApp\Model\Builder\BuilderAbstract;
 use App\Domains\Measure\Model\MeasureDisk as MeasureDiskModel;
+use App\Domains\Measure\Model\Traits\MeasureChart;
 
 class Measure extends BuilderAbstract
 {
+    use MeasureChart;
+
     /**
      * @var array
      */

@@ -67,9 +67,27 @@ class MeasureRetention extends ActionAbstract
             return;
         }
 
-        MeasureModel::query()
+        while ($ids = $this->deleteIds()) {
+            MeasureModel::query()
+                ->byServerId($this->row->id)
+                ->whereIn('id', $ids)
+                ->delete();
+
+            usleep(200000);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    protected function deleteIds(): array
+    {
+        return MeasureModel::query()
             ->byServerId($this->row->id)
             ->byIdBefore($this->data['measure_id'])
-            ->delete();
+            ->orderByFirst()
+            ->limit(250)
+            ->pluck('id')
+            ->all();
     }
 }
