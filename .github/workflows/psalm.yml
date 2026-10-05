@@ -9,6 +9,9 @@ on:
 jobs:
   psalm:
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: testing
+      CACHE_DRIVER: array
     steps:
       - uses: actions/checkout@v6
 
@@ -17,6 +20,12 @@ jobs:
         with:
           php-version: '8.4'
           coverage: none
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          mkdir -p storage/database
+          touch storage/database/database.sqlite
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
